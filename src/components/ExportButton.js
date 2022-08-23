@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import html2canvas from "html2canvas";
 import { CgSoftwareDownload } from "react-icons/cg";
 
 const ButtonContainer = styled.div`
@@ -34,9 +35,30 @@ const Text = styled.p`
 `;
 
 const ExportButton = () => {
+  const handleExport = () => {
+    html2canvas(document.querySelector("#export"), { scale: 2 }).then((canvas) => {
+      handleDownload(canvas);
+    });
+  };
+
+  const handleDownload = (canvas) => {
+    const uri = canvas.toDataURL();
+    const filename = "code.png";
+    const link = document.createElement("a");
+    if (typeof link.download === "string") {
+      link.href = uri;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  };
+
   return (
     <ButtonContainer>
-      <Button>
+      <Button onClick={handleExport}>
         <Text>Export</Text>
         <CgSoftwareDownload fontSize={30} />
       </Button>
