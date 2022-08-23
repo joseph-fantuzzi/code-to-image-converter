@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Settings from "./Settings";
 import Image from "./Image";
 import ExportButton from "./ExportButton";
@@ -21,13 +21,15 @@ const Container = styled.div`
 `;
 
 const Main = () => {
+  const [background, setBackground] = useState("orange/red");
+
   return (
     <div>
       <Container>
-        <Settings />
+        <Settings background={background} setBackground={setBackground} />
         <ExportButton />
       </Container>
-      <Image />
+      <Image background={background} />
     </div>
   );
 };

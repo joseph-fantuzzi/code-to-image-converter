@@ -5,10 +5,45 @@ const ImageContainer = styled.div`
   width: 90%;
   height: 400px;
   margin: 0 auto;
-  background: linear-gradient(107.54deg, #ffdf70 7.1%, #980606 91.97%);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
+  background: ${(props) => {
+    if (props.background === "blue") return "#84CBFF;";
+    else if (props.background === "green") return "#8BFFA5;";
+    else if (props.background === "purple") return "#A0A8F4;";
+    else if (props.background === "orange") return "#FEB68E;";
+    else if (props.background === "red") return "#FC4646;";
+    else if (props.background === "pink") return "#FEC7FF;";
+    else if (props.background === "yellow") return "#F2FFA3;";
+    else if (props.background === "aqua") return "#6DE3FD;";
+    else if (props.background === "orange/red") {
+      return "linear-gradient(107.54deg, #FFDF70 7.1%, #980606 91.97%);";
+    } else if (props.background === "blue/purple") {
+      return "linear-gradient(107.54deg, #15FFE3 7.1%, #4C0067 91.97%);";
+    } else if (props.background === "pink/purple") {
+      return "linear-gradient(107.54deg, #E588FC 7.1%, #163354 91.97%);";
+    } else if (props.background === "green/blue") {
+      return "linear-gradient(107.54deg, #69F466 7.1%, #025365 91.97%);";
+    } else if (props.background === "purple/dark") {
+      return "linear-gradient(107.54deg, #C4BAFF 7.1%, #3E006F 91.97%);";
+    } else if (props.background === "gold/dark") {
+      return "linear-gradient(107.54deg, #ECCE82 7.1%, #684500 91.97%);";
+    } else if (props.background === "yellow/dark") {
+      return "linear-gradient(107.54deg, #FCFF51 7.1%, #5B6300 91.97%);";
+    } else if (props.background === "red/dark") {
+      return "linear-gradient(107.54deg, #F98E8E 7.1%, #590101 91.97%);";
+    } else if (props.background === "aqua/dark") {
+      return "linear-gradient(107.54deg, #BAFFFB 7.1%, #01504B 91.97%);";
+    } else if (props.background === "pink/dark") {
+      return "linear-gradient(107.54deg, #FDA5FF 7.1%, #7A0058 91.97%);";
+    } else if (props.background === "green/dark") {
+      return "linear-gradient(107.54deg, #97FF9B 7.1%, #0B5200 91.97%);";
+    } else if (props.background === "blue/dark") {
+      return "linear-gradient(107.54deg, #97DAFF 7.1%, #02486F 91.97%);";
+    }
+  }};
 
   @media (min-width: 800px) {
     width: 65%;
@@ -135,12 +170,13 @@ const Icon = styled.div`
   background-color: #cdcdcd;
 `;
 
-const Image = () => {
+const Main = styled.div``;
+
+const Image = ({ background }) => {
   const [title, setTitle] = useState("");
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
-    console.log(e.target.size);
     setTitle(e.target.value);
   };
 
@@ -153,7 +189,7 @@ const Image = () => {
   };
 
   return (
-    <ImageContainer id="capture">
+    <ImageContainer id="capture" background={background}>
       <TextEditor>
         <Header>
           <DotContainer>
@@ -172,6 +208,7 @@ const Image = () => {
           </FilenameContainer>
           <Icon></Icon>
         </Header>
+        <Main></Main>
       </TextEditor>
     </ImageContainer>
   );

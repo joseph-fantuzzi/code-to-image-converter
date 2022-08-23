@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Color from "./Color";
 import Mode from "./Mode";
 import Padding from "./Padding";
 import Language from "./Language";
+import DropDown from "./DropDown";
 
 const SettingsContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.66);
@@ -14,6 +15,9 @@ const SettingsContainer = styled.div`
   gap: 20px;
   justify-content: space-around;
   padding: 1em 2em;
+  width: 40%;
+  min-width: 260px;
+  max-width: 400px;
 `;
 
 const Setting = styled.div`
@@ -29,7 +33,19 @@ const Text = styled.p`
   margin-bottom: 0.5em;
 `;
 
-const Settings = () => {
+const IconContainer = styled.div`
+  padding: 0.2em;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 62%);
+  }
+`;
+const Settings = ({ background, setBackground }) => {
+  const [dropDown, setDropDown] = useState(false);
+
   const settings = [
     { name: "Color", icon: <Color /> },
     { name: "Mode", icon: <Mode /> },
@@ -38,16 +54,28 @@ const Settings = () => {
   ];
 
   return (
-    <SettingsContainer>
-      {settings.map((setting, i) => {
-        return (
-          <Setting key={i}>
-            <Text>{setting.name}</Text>
-            {setting.icon}
-          </Setting>
-        );
-      })}
-    </SettingsContainer>
+    <>
+      <SettingsContainer>
+        {settings.map((setting, i) => {
+          return (
+            <Setting key={i}>
+              <Text>{setting.name}</Text>
+              <IconContainer onClick={() => setDropDown(setting.name)}>
+                {setting.icon}
+              </IconContainer>
+            </Setting>
+          );
+        })}
+      </SettingsContainer>
+      {dropDown && (
+        <DropDown
+          dropDown={dropDown}
+          setDropDown={setDropDown}
+          background={background}
+          setBackground={setBackground}
+        />
+      )}
+    </>
   );
 };
 

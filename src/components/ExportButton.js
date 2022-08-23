@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
 import { CgSoftwareDownload } from "react-icons/cg";
@@ -16,7 +16,7 @@ const Button = styled.div`
   box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
   border-radius: 8px;
   border: 2px solid #e2e8ec;
-  padding: 0.7em 1em;
+  padding: 0.4em 0.7em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,14 +27,28 @@ const Button = styled.div`
     border: 2px solid #dc4b4b;
     background-color: #dc4b4b3e;
   }
+
+  @media (min-width: 800px) {
+    padding: 0.7em 1em;
+  }
 `;
 
 const Text = styled.p`
-  font-size: 1.2em;
+  font-size: 0.9em;
   margin-right: 0.3em;
+
+  @media (min-width: 800px) {
+    font-size: 1.2em;
+  }
 `;
 
 const ExportButton = () => {
+  const [fontSize, setFontSize] = useState(20);
+
+  useEffect(() => {
+    getFontSize();
+  }, []);
+
   const handleExport = () => {
     html2canvas(document.querySelector("#capture"))
       .then((canvas) => {
@@ -52,11 +66,23 @@ const ExportButton = () => {
       });
   };
 
+  const getFontSize = () => {
+    if (window.matchMedia("(min-width: 800px)").matches) {
+      setFontSize(30);
+    } else {
+      setFontSize(20);
+    }
+  };
+
+  window.addEventListener("resize", () => {
+    getFontSize();
+  });
+
   return (
     <ButtonContainer>
       <Button onClick={handleExport}>
         <Text>Export</Text>
-        <CgSoftwareDownload fontSize={30} />
+        <CgSoftwareDownload fontSize={fontSize} />
       </Button>
     </ButtonContainer>
   );
