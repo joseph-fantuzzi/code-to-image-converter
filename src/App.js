@@ -39,7 +39,7 @@ const Header = styled.div`
 
 const Title = styled.h1`
   font-size: 1.5em;
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 0.2em;
 
   @media (min-width: 800px) {
