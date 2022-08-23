@@ -36,7 +36,7 @@ const Text = styled.p`
 
 const ExportButton = () => {
   const handleExport = () => {
-    html2canvas(document.querySelector("body"))
+    html2canvas(document.querySelector("#capture"))
       .then((canvas) => {
         canvas.style.display = "none";
         document.body.appendChild(canvas);
