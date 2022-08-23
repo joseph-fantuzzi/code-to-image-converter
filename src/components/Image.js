@@ -2,14 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const ImageContainer = styled.div`
-  width: 65%;
-  height: 600px;
+  width: 90%;
+  height: 400px;
   margin: 0 auto;
   border-radius: 32px;
   background: linear-gradient(107.54deg, #ffdf70 7.1%, #980606 91.97%);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 800px) {
+    width: 65%;
+    height: 600px;
+  }
 `;
 const TextEditor = styled.div`
   width: 70%;

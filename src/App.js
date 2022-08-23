@@ -21,17 +21,38 @@ const Footer = styled.footer`
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  padding: 3em 4em;
+  padding: 3em 0;
+  margin-left: 5%;
+
+  @media (min-width: 800px) {
+    margin-left: 17.5%;
+  }
 `;
 
 const Header = styled.div`
-  margin-left: 4em;
+  margin-left: 1.5em;
+
+  @media (min-width: 800px) {
+    margin-left: 3em;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 2.5em;
+  font-size: 1.5em;
   font-weight: 700;
   margin-bottom: 0.2em;
+
+  @media (min-width: 800px) {
+    font-size: 2.5em;
+  }
+`;
+
+const Description = styled.p`
+  font-size: 0.8em;
+
+  @media (min-width: 800px) {
+    font-size: 1em;
+  }
 `;
 
 function App() {
@@ -42,7 +63,7 @@ function App() {
           <Logo />
           <Header>
             <Title>Zitrous</Title>
-            <p>An all-in-one code to styled image converter.</p>
+            <Description>An all-in-one code to styled image converter.</Description>
           </Header>
         </Nav>
         <Main />
