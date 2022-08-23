@@ -36,24 +36,20 @@ const Text = styled.p`
 
 const ExportButton = () => {
   const handleExport = () => {
-    html2canvas(document.querySelector("#export"), { scale: 2 }).then((canvas) => {
-      handleDownload(canvas);
-    });
-  };
-
-  const handleDownload = (canvas) => {
-    const uri = canvas.toDataURL();
-    const filename = "code.png";
-    const link = document.createElement("a");
-    if (typeof link.download === "string") {
-      link.href = uri;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(uri);
-    }
+    html2canvas(document.querySelector("body"))
+      .then((canvas) => {
+        canvas.style.display = "none";
+        document.body.appendChild(canvas);
+        return canvas;
+      })
+      .then((canvas) => {
+        const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        const a = document.createElement("a");
+        a.setAttribute("download", "code.png");
+        a.setAttribute("href", image);
+        a.click();
+        canvas.remove();
+      });
   };
 
   return (
