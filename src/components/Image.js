@@ -5,7 +5,7 @@ const ImageContainer = styled.div`
   width: 90%;
   height: 400px;
   margin: 0 auto;
-  border-radius: 32px;
+  border-radius: 8px;
   background: linear-gradient(107.54deg, #ffdf70 7.1%, #980606 91.97%);
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ const ImageContainer = styled.div`
 
   @media (min-width: 800px) {
     width: 65%;
-    height: 600px;
+    height: 550px;
   }
 `;
 const TextEditor = styled.div`

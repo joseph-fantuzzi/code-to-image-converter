@@ -3,13 +3,12 @@ import styled from "styled-components";
 import { CgSoftwareDownload } from "react-icons/cg";
 
 const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 65%;
-  padding: 2em 0;
-  padding-top: 0;
-  margin: 0 auto;
+  margin-bottom: 1.5em;
+
+  @media (min-width: 800px) {
+    margin-left: 4em;
+    margin-bottom: 0;
+  }
 `;
 
 const Button = styled.div`
@@ -18,7 +17,7 @@ const Button = styled.div`
   border: 2px solid #e2e8ec;
   padding: 0.7em 1em;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
