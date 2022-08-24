@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
+// import * as htmlToImage from "html-to-image";
+// import { toPng } from "html-to-image";
+// import download from "downloadjs";
 import { CgSoftwareDownload } from "react-icons/cg";
 
 const ButtonContainer = styled.div`
@@ -42,29 +45,12 @@ const Text = styled.p`
   }
 `;
 
-const ExportButton = () => {
+const ExportButton = ({ handleExport }) => {
   const [fontSize, setFontSize] = useState(20);
 
   useEffect(() => {
     getFontSize();
   }, []);
-
-  const handleExport = () => {
-    html2canvas(document.querySelector("#capture"))
-      .then((canvas) => {
-        canvas.style.display = "none";
-        document.body.appendChild(canvas);
-        return canvas;
-      })
-      .then((canvas) => {
-        const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        const a = document.createElement("a");
-        a.setAttribute("download", "code.png");
-        a.setAttribute("href", image);
-        a.click();
-        canvas.remove();
-      });
-  };
 
   const getFontSize = () => {
     if (window.matchMedia("(min-width: 800px)").matches) {

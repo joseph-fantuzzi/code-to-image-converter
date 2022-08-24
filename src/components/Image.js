@@ -172,8 +172,10 @@ const Icon = styled.div`
 
 const Main = styled.div``;
 
-const Image = ({ background }) => {
+const Image = (props) => {
   const [title, setTitle] = useState("");
+
+  const { background } = props;
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
