@@ -43,7 +43,7 @@ const IconContainer = styled.div`
     background-color: rgba(255, 255, 255, 62%);
   }
 `;
-const Settings = ({ background, setBackground }) => {
+const Settings = ({ background, setBackground, mode, setMode }) => {
   const [dropDown, setDropDown] = useState(false);
 
   const settings = [
@@ -73,6 +73,8 @@ const Settings = ({ background, setBackground }) => {
           setDropDown={setDropDown}
           background={background}
           setBackground={setBackground}
+          mode={mode}
+          setMode={setMode}
         />
       )}
     </>

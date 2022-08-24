@@ -13,6 +13,7 @@ const Container = styled.div`
   margin: 0 5%;
   align-items: flex-end;
   padding-bottom: 2em;
+  position: relative;
 
   @media (min-width: 800px) {
     margin: 0 17.5%;
@@ -23,28 +24,11 @@ const Container = styled.div`
 
 const Main = () => {
   const [background, setBackground] = useState("orange/red");
+  const [mode, setMode] = useState("dark");
 
   const ref = useRef(null);
 
   const handleExport = useCallback(() => {
-    //  html2canvas(document.querySelector("#capture"))
-    //    .then((canvas) => {
-    //      canvas.style.display = "none";
-    //      document.body.appendChild(canvas);
-    //      return canvas;
-    //    })
-    //    .then((canvas) => {
-    //      const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    //      const a = document.createElement("a");
-    //      a.setAttribute("download", "code.png");
-    //      a.setAttribute("href", image);
-    //      a.click();
-    //      canvas.remove();
-    //    });
-
-    //  htmlToImage.toPng(document.getElementById("capture")).then(function (dataUrl) {
-    //    download(dataUrl, "code.png");
-
     if (ref.current === null) {
       return;
     }
@@ -64,11 +48,16 @@ const Main = () => {
   return (
     <div>
       <Container>
-        <Settings background={background} setBackground={setBackground} />
+        <Settings
+          background={background}
+          setBackground={setBackground}
+          mode={mode}
+          setMode={setMode}
+        />
         <ExportButton handleExport={handleExport} />
       </Container>
       <div ref={ref}>
-        <Image background={background} />
+        <Image background={background} mode={mode} />
       </div>
     </div>
   );

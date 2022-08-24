@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { VscClose } from "react-icons/vsc";
+import ModeDropDown from "./ModeDropDown";
 
 const Container = styled.div`
   width: 20%;
@@ -12,12 +13,17 @@ const Container = styled.div`
   font-size: 0.7em;
   padding: 1.5em 1em;
   position: absolute;
-  top: 290px;
-  right: 40%;
+  top: 150px;
+  right: 120px;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   min-width: 230px;
   max-width: 318px;
+
+  @media (min-width: 800px) {
+    top: 90px;
+    right: 340px;
+  }
 `;
 
 const Text = styled.div`
@@ -136,7 +142,7 @@ const ColorContainerSelected = styled.div`
   background-color: white;
 `;
 
-const DropDown = ({ dropDown, setDropDown, background, setBackground }) => {
+const DropDown = ({ dropDown, setDropDown, background, setBackground, mode, setMode }) => {
   const handleClick = (color) => {
     setBackground(color);
   };
@@ -420,7 +426,7 @@ const DropDown = ({ dropDown, setDropDown, background, setBackground }) => {
       </Container>
     );
   } else if (dropDown === "Mode") {
-    return <div></div>;
+    return <ModeDropDown setDropDown={setDropDown} mode={mode} setMode={setMode} />;
   } else if (dropDown === "Padding") {
     return <div></div>;
   } else if (dropDown === "Language") {

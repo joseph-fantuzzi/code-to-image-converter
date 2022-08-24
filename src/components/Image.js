@@ -53,9 +53,16 @@ const ImageContainer = styled.div`
 const TextEditor = styled.div`
   width: 60%;
   height: 60%;
-  background: linear-gradient(105.19deg, rgba(0, 0, 0, 0.4725) 0%, rgba(0, 0, 0, 0.63) 101.41%);
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.26);
   border-radius: 24px;
+  transition: all 0.3s ease;
+  background: ${(props) => {
+    if (props.mode === "dark") {
+      return "linear-gradient(105.19deg, rgba(0, 0, 0, 0.4725) 0%, rgba(0, 0, 0, 0.63) 101.41%);";
+    } else if (props.mode === "light") {
+      return "linear-gradient(103.82deg, rgba(255, 255, 255, 0.57) 5.09%, rgba(255, 255, 255, 0.76) 81.57%);";
+    }
+  }};
 `;
 
 const DotContainer = styled.div`
@@ -76,7 +83,6 @@ const Dot = styled.div`
 `;
 
 const Filename = styled.input`
-  color: #cdcdcd;
   font-weight: 200;
   font-family: "Poppins", sans-serif;
   font-size: 0.6em;
@@ -86,6 +92,8 @@ const Filename = styled.input`
   border: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all 0.3s ease;
+  color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
 
   &:focus {
     outline: none;
@@ -104,7 +112,7 @@ const Filename = styled.input`
   }
 
   &::placeholder {
-    color: #cdcdcd;
+    color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
     font-weight: 200;
     font-size: 0.8em;
 
@@ -115,7 +123,7 @@ const Filename = styled.input`
 
   &:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #cdcdcd;
+    color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
     font-weight: 200;
     font-size: 0.6em;
 
@@ -126,7 +134,7 @@ const Filename = styled.input`
 
   &::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #cdcdcd;
+    color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
     font-weight: 200;
     font-size: 0.6em;
 
@@ -167,7 +175,8 @@ const Icon = styled.div`
   width: 46px;
   height: 3px;
   border-radius: 10px;
-  background-color: #cdcdcd;
+  transition: all 0.3s ease;
+  background-color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
 `;
 
 const Main = styled.div``;
@@ -175,7 +184,7 @@ const Main = styled.div``;
 const Image = (props) => {
   const [title, setTitle] = useState("");
 
-  const { background } = props;
+  const { background, mode } = props;
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
@@ -192,7 +201,7 @@ const Image = (props) => {
 
   return (
     <ImageContainer id="capture" background={background}>
-      <TextEditor>
+      <TextEditor mode={mode}>
         <Header>
           <DotContainer>
             <Dot red></Dot>
@@ -206,9 +215,10 @@ const Image = (props) => {
               onChange={onChange}
               placeholder="Untitled"
               maxLength={getMaxLength()}
+              mode={mode}
             />
           </FilenameContainer>
-          <Icon></Icon>
+          <Icon mode={mode}></Icon>
         </Header>
         <Main></Main>
       </TextEditor>
