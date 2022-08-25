@@ -25,6 +25,7 @@ const Container = styled.div`
 const Main = () => {
   const [background, setBackground] = useState("orange/red");
   const [mode, setMode] = useState("dark");
+  const [padding, setPadding] = useState("LG");
 
   const ref = useRef(null);
 
@@ -53,11 +54,13 @@ const Main = () => {
           setBackground={setBackground}
           mode={mode}
           setMode={setMode}
+          padding={padding}
+          setPadding={setPadding}
         />
         <ExportButton handleExport={handleExport} />
       </Container>
       <div ref={ref}>
-        <Image background={background} mode={mode} />
+        <Image background={background} mode={mode} padding={padding} />
       </div>
     </div>
   );

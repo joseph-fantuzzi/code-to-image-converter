@@ -16,7 +16,7 @@ const SettingsContainer = styled.div`
   justify-content: space-around;
   padding: 1em 2em;
   width: 40%;
-  min-width: 260px;
+  min-width: 280px;
   max-width: 400px;
 `;
 
@@ -37,13 +37,16 @@ const IconContainer = styled.div`
   padding: 0.2em;
   border-radius: 8px;
   transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(255, 255, 255, 62%);
   }
 `;
-const Settings = ({ background, setBackground, mode, setMode }) => {
+const Settings = ({ background, setBackground, mode, setMode, padding, setPadding }) => {
   const [dropDown, setDropDown] = useState(false);
 
   const settings = [
@@ -75,6 +78,8 @@ const Settings = ({ background, setBackground, mode, setMode }) => {
           setBackground={setBackground}
           mode={mode}
           setMode={setMode}
+          padding={padding}
+          setPadding={setPadding}
         />
       )}
     </>

@@ -51,8 +51,28 @@ const ImageContainer = styled.div`
   }
 `;
 const TextEditor = styled.div`
-  width: 60%;
-  height: 60%;
+  width: ${(props) => {
+    if (props.padding === "SM") {
+      return "96%";
+    } else if (props.padding === "MD") {
+      return "83%";
+    } else if (props.padding === "LG") {
+      return "69.5%";
+    } else if (props.padding === "XL") {
+      return "57%";
+    }
+  }};
+  height: ${(props) => {
+    if (props.padding === "SM") {
+      return "96%";
+    } else if (props.padding === "MD") {
+      return "83%";
+    } else if (props.padding === "LG") {
+      return "69.5%";
+    } else if (props.padding === "XL") {
+      return "57%";
+    }
+  }};
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.26);
   border-radius: 24px;
   transition: all 0.3s ease;
@@ -184,7 +204,7 @@ const Main = styled.div``;
 const Image = (props) => {
   const [title, setTitle] = useState("");
 
-  const { background, mode } = props;
+  const { background, mode, padding } = props;
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
@@ -201,7 +221,7 @@ const Image = (props) => {
 
   return (
     <ImageContainer id="capture" background={background}>
-      <TextEditor mode={mode}>
+      <TextEditor mode={mode} padding={padding}>
         <Header>
           <DotContainer>
             <Dot red></Dot>

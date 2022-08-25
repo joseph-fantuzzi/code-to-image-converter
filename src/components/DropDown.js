@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { VscClose } from "react-icons/vsc";
 import ModeDropDown from "./ModeDropDown";
+import PaddingDropDown from "./PaddingDropDown";
 
 const Container = styled.div`
   width: 20%;
@@ -115,7 +116,6 @@ const GradientColor = styled.div`
 
 const ColorContainer = styled.div`
   cursor: pointer;
-  transition: all 0.3s ease;
   border-radius: 8px;
   margin-bottom: 1.5em;
   width: 35px;
@@ -131,7 +131,6 @@ const ColorContainer = styled.div`
 
 const ColorContainerSelected = styled.div`
   cursor: pointer;
-  transition: all 0.3s ease;
   border-radius: 8px;
   margin-bottom: 1.5em;
   width: 35px;
@@ -142,7 +141,16 @@ const ColorContainerSelected = styled.div`
   background-color: white;
 `;
 
-const DropDown = ({ dropDown, setDropDown, background, setBackground, mode, setMode }) => {
+const DropDown = ({
+  dropDown,
+  setDropDown,
+  background,
+  setBackground,
+  mode,
+  setMode,
+  padding,
+  setPadding,
+}) => {
   const handleClick = (color) => {
     setBackground(color);
   };
@@ -428,7 +436,7 @@ const DropDown = ({ dropDown, setDropDown, background, setBackground, mode, setM
   } else if (dropDown === "Mode") {
     return <ModeDropDown setDropDown={setDropDown} mode={mode} setMode={setMode} />;
   } else if (dropDown === "Padding") {
-    return <div></div>;
+    return <PaddingDropDown setDropDown={setDropDown} padding={padding} setPadding={setPadding} />;
   } else if (dropDown === "Language") {
     return <div></div>;
   }
