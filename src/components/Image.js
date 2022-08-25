@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../App.css";
 import styled from "styled-components";
 import CodeMirror from "@uiw/react-codemirror";
+import { EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { html } from "@codemirror/lang-html";
+import { css } from "@codemirror/lang-css";
 import { createTheme } from "@uiw/codemirror-themes";
 import { tags as t } from "@lezer/highlight";
 
@@ -281,7 +283,7 @@ const Image = (props) => {
     }
   };
 
-  const getHeight = () => {
+  const getHeight = useCallback(() => {
     if (window.matchMedia("(min-width: 800px)").matches) {
       if (padding === "SM") return "450px";
       else if (padding === "MD") return "380px";
@@ -293,17 +295,14 @@ const Image = (props) => {
       else if (padding === "LG") return "210px";
       else if (padding === "XL") return "160px";
     }
-  };
+  }, [padding]);
 
   useEffect(() => {
     getHeight();
-  }, [padding]);
+  }, [padding, getHeight]);
 
   const change = React.useCallback((value, viewUpdate) => {
     setCode(value);
-    if (value.length % 48 === 0) {
-      setCode(value + "\n");
-    }
   }, []);
 
   return (
@@ -335,11 +334,10 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[javascript({ jsx: true })]}
+            extensions={[EditorView.lineWrapping, javascript({ jsx: true })]}
             options={{
-              autoCompletion: false,
+              autocompletion: false,
               syntaxHighlighting: false,
-              lineWrapping: true,
               viewportMargin: Infinity,
             }}
           />
@@ -352,11 +350,26 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[html()]}
+            extensions={[EditorView.lineWrapping, html()]}
             options={{
-              autoCompletion: false,
+              autocompletion: false,
               syntaxHighlighting: false,
-              lineWrapping: true,
+              viewportMargin: Infinity,
+            }}
+          />
+        )}
+        {lang === "CSS" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, css()]}
+            options={{
+              autocompletion: false,
+              syntaxHighlighting: false,
               viewportMargin: Infinity,
             }}
           />
