@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { VscClose } from "react-icons/vsc";
 import ModeDropDown from "./ModeDropDown";
 import PaddingDropDown from "./PaddingDropDown";
+import LanguageDropDown from "./LanguageDropDown";
 
 const Container = styled.div`
   width: 20%;
@@ -150,6 +151,8 @@ const DropDown = ({
   setMode,
   padding,
   setPadding,
+  lang,
+  setLang,
 }) => {
   const handleClick = (color) => {
     setBackground(color);
@@ -438,7 +441,7 @@ const DropDown = ({
   } else if (dropDown === "Padding") {
     return <PaddingDropDown setDropDown={setDropDown} padding={padding} setPadding={setPadding} />;
   } else if (dropDown === "Language") {
-    return <div></div>;
+    return <LanguageDropDown setDropDown={setDropDown} lang={lang} setLang={setLang} />;
   }
 };
 

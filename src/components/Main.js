@@ -26,6 +26,7 @@ const Main = () => {
   const [background, setBackground] = useState("orange/red");
   const [mode, setMode] = useState("dark");
   const [padding, setPadding] = useState("LG");
+  const [lang, setLang] = useState("JavaScript");
 
   const ref = useRef(null);
 
@@ -56,11 +57,13 @@ const Main = () => {
           setMode={setMode}
           padding={padding}
           setPadding={setPadding}
+          lang={lang}
+          setLang={setLang}
         />
         <ExportButton handleExport={handleExport} />
       </Container>
       <div ref={ref}>
-        <Image background={background} mode={mode} padding={padding} />
+        <Image background={background} mode={mode} padding={padding} lang={lang} />
       </div>
     </div>
   );

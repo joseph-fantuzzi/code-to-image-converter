@@ -204,7 +204,7 @@ const Main = styled.div``;
 const Image = (props) => {
   const [title, setTitle] = useState("");
 
-  const { background, mode, padding } = props;
+  const { background, mode, padding, lang } = props;
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
