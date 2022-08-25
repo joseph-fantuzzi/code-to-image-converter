@@ -4,8 +4,19 @@ import styled from "styled-components";
 import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { python } from "@codemirror/lang-python";
+import { java } from "@codemirror/lang-java";
+import { rust } from "@codemirror/lang-rust";
+import { sql } from "@codemirror/lang-sql";
+import { php } from "@codemirror/lang-php";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { languages } from "@codemirror/language-data";
+import { StreamLanguage } from "@codemirror/language";
+import { go } from "@codemirror/legacy-modes/mode/go";
+import { json } from "@codemirror/lang-json";
+import { cpp } from "@codemirror/lang-cpp";
 import { createTheme } from "@uiw/codemirror-themes";
 import { tags as t } from "@lezer/highlight";
 
@@ -335,11 +346,7 @@ const Image = (props) => {
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
             extensions={[EditorView.lineWrapping, javascript({ jsx: true })]}
-            options={{
-              autocompletion: false,
-              syntaxHighlighting: false,
-              viewportMargin: Infinity,
-            }}
+            options={{}}
           />
         )}
         {lang === "HTML" && (
@@ -351,11 +358,7 @@ const Image = (props) => {
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
             extensions={[EditorView.lineWrapping, html()]}
-            options={{
-              autocompletion: false,
-              syntaxHighlighting: false,
-              viewportMargin: Infinity,
-            }}
+            options={{}}
           />
         )}
         {lang === "CSS" && (
@@ -367,11 +370,118 @@ const Image = (props) => {
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
             extensions={[EditorView.lineWrapping, css()]}
-            options={{
-              autocompletion: false,
-              syntaxHighlighting: false,
-              viewportMargin: Infinity,
-            }}
+            options={{}}
+          />
+        )}
+        {lang === "Python" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, python()]}
+            options={{}}
+          />
+        )}
+        {lang === "Java" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, java()]}
+            options={{}}
+          />
+        )}
+        {lang === "Rust" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, rust()]}
+            options={{}}
+          />
+        )}
+        {lang === "SQL" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, sql()]}
+            options={{}}
+          />
+        )}
+        {lang === "PHP" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, php()]}
+            options={{}}
+          />
+        )}
+        {lang === "Markdown" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[
+              EditorView.lineWrapping,
+              markdown({ base: markdownLanguage, codeLanguages: languages }),
+            ]}
+            options={{}}
+          />
+        )}
+        {lang === "JSON" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, json()]}
+            options={{}}
+          />
+        )}
+        {lang === "C++" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, cpp()]}
+            options={{}}
+          />
+        )}
+        {lang === "Go" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[EditorView.lineWrapping, StreamLanguage.define(go)]}
+            options={{}}
           />
         )}
       </TextEditor>

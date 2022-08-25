@@ -43,7 +43,7 @@ const LangContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.3em;
+  gap: 0.7em;
   font-size: 1.2em;
   margin-top: 0.6em;
   text-align: center;
@@ -72,19 +72,17 @@ const LangSelected = styled.div`
 
 const LanguageDropDown = ({ setDropDown, lang, setLang }) => {
   const languages = [
-    "C",
     "C++",
-    "C#",
     "CSS",
     "Go",
     "HTML",
     "Java",
     "JavaScript",
+    "JSON",
     "Markdown",
     "PHP",
-    "Ruby",
+    "Python",
     "Rust",
-    "Sass",
     "SQL",
   ];
 
