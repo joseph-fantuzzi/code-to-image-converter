@@ -1,3 +1,19 @@
 .cm-editor.cm-focused {
   outline: none !important;
 }
+
+.CodeMirror {
+  font-size: 1em;
+  height: auto;
+}
+
+.cm-scroller {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+@media (min-width: 800px) {
+  .CodeMirror {
+    font-size: 1.3em;
+  }
+}

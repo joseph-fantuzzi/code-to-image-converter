@@ -18,6 +18,7 @@ const Container = styled.div`
   transition: all 0.3s ease;
   min-width: 200px;
   max-width: 250px;
+  z-index: 1;
 
   @media (min-width: 800px) {
     top: 90px;

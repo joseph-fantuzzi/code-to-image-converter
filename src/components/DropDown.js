@@ -21,6 +21,7 @@ const Container = styled.div`
   transition: all 0.3s ease;
   min-width: 230px;
   max-width: 318px;
+  z-index: 1;
 
   @media (min-width: 800px) {
     top: 90px;

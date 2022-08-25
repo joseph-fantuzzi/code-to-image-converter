@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import styled from "styled-components";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { html } from "@codemirror/lang-html";
 import { createTheme } from "@uiw/codemirror-themes";
 import { tags as t } from "@lezer/highlight";
 
@@ -204,8 +205,8 @@ const Icon = styled.div`
   background-color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
 `;
 
-const myTheme = createTheme({
-  dark: "light",
+const myThemeDark = createTheme({
+  dark: "dark",
   settings: {
     background: "linear-gradient(105.19deg, rgba(0, 0, 0, 0.4725) 0%, rgba(0, 0, 0, 0.63) 101.41%)",
     foreground: "#e2e8ec",
@@ -232,8 +233,38 @@ const myTheme = createTheme({
   ],
 });
 
+const myThemeLight = createTheme({
+  dark: "light",
+  settings: {
+    background:
+      "linear-gradient(103.82deg, rgba(255, 255, 255, 0.57) 5.09%, rgba(255, 255, 255, 0.76) 81.57%)",
+    foreground: "#484848",
+    caret: "#484848",
+    selection: "#ffffff30",
+    selectionMatch: "#2B323D",
+    gutterBackground: "rgba(0, 0, 0, 0)",
+    gutterForeground: "rgba(0, 0, 0, 0)",
+    gutterBorder: "rgba(0, 0, 0, 0)",
+    lineHighlight: "rgba(0, 0, 0, 0)",
+  },
+  styles: [
+    {
+      tag: [t.function(t.variableName), t.function(t.propertyName), t.url, t.processingInstruction],
+      color: "hsl(207, 82%, 66%)",
+    },
+    { tag: [t.tagName, t.heading], color: "#e06c75" },
+    { tag: t.comment, color: "#54636D" },
+    { tag: [t.propertyName], color: "hsl(220, 14%, 71%)" },
+    { tag: [t.attributeName, t.number], color: "hsl( 29, 54%, 61%)" },
+    { tag: t.className, color: "hsl( 39, 67%, 69%)" },
+    { tag: t.keyword, color: "hsl(286, 60%, 67%)" },
+    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#98c379" },
+  ],
+});
+
 const Image = (props) => {
   const [title, setTitle] = useState("");
+  const [code, setCode] = useState("");
 
   const { background, mode, padding, lang } = props;
 
@@ -252,15 +283,26 @@ const Image = (props) => {
 
   const getHeight = () => {
     if (window.matchMedia("(min-width: 800px)").matches) {
-      return "300px";
+      if (padding === "SM") return "450px";
+      else if (padding === "MD") return "380px";
+      else if (padding === "LG") return "300px";
+      else if (padding === "XL") return "240px";
     } else {
-      return "200px";
+      if (padding === "SM") return "320px";
+      else if (padding === "MD") return "260px";
+      else if (padding === "LG") return "210px";
+      else if (padding === "XL") return "160px";
     }
   };
 
+  useEffect(() => {
+    getHeight();
+  }, [padding]);
+
   const change = React.useCallback((value, viewUpdate) => {
-    if (value.length === 100) {
-      console.log(value);
+    setCode(value);
+    if (value.length % 48 === 0) {
+      setCode(value + "\n");
     }
   }, []);
 
@@ -285,18 +327,40 @@ const Image = (props) => {
           </FilenameContainer>
           <Icon mode={mode}></Icon>
         </Header>
-        <CodeMirror
-          value=""
-          height={getHeight()}
-          width="95%"
-          theme={myTheme}
-          extensions={[javascript({ jsx: true })]}
-          onChange={change}
-          options={{
-            autoCompletion: false,
-            syntaxHighlighting: false,
-          }}
-        />
+        {lang === "JavaScript" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[javascript({ jsx: true })]}
+            options={{
+              autoCompletion: false,
+              syntaxHighlighting: false,
+              lineWrapping: true,
+              viewportMargin: Infinity,
+            }}
+          />
+        )}
+        {lang === "HTML" && (
+          <CodeMirror
+            value={code}
+            height={getHeight()}
+            className="CodeMirror"
+            width="95%"
+            onChange={change}
+            theme={mode === "dark" ? myThemeDark : myThemeLight}
+            extensions={[html()]}
+            options={{
+              autoCompletion: false,
+              syntaxHighlighting: false,
+              lineWrapping: true,
+              viewportMargin: Infinity,
+            }}
+          />
+        )}
       </TextEditor>
     </ImageContainer>
   );
