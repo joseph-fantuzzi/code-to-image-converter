@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import "../App.css";
 import styled from "styled-components";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { createTheme } from "@uiw/codemirror-themes";
+import { tags as t } from "@lezer/highlight";
 
 const ImageContainer = styled.div`
   width: 90%;
@@ -199,7 +204,33 @@ const Icon = styled.div`
   background-color: ${(props) => (props.mode === "dark" ? "#cdcdcd" : "#484848")};
 `;
 
-const Main = styled.div``;
+const myTheme = createTheme({
+  dark: "light",
+  settings: {
+    background: "linear-gradient(105.19deg, rgba(0, 0, 0, 0.4725) 0%, rgba(0, 0, 0, 0.63) 101.41%)",
+    foreground: "#e2e8ec",
+    caret: "#e2e8ec",
+    selection: "#ffffff30",
+    selectionMatch: "#2B323D",
+    gutterBackground: "rgba(0, 0, 0, 0)",
+    gutterForeground: "rgba(0, 0, 0, 0)",
+    gutterBorder: "rgba(0, 0, 0, 0)",
+    lineHighlight: "rgba(0, 0, 0, 0)",
+  },
+  styles: [
+    {
+      tag: [t.function(t.variableName), t.function(t.propertyName), t.url, t.processingInstruction],
+      color: "hsl(207, 82%, 66%)",
+    },
+    { tag: [t.tagName, t.heading], color: "#e06c75" },
+    { tag: t.comment, color: "#54636D" },
+    { tag: [t.propertyName], color: "hsl(220, 14%, 71%)" },
+    { tag: [t.attributeName, t.number], color: "hsl( 29, 54%, 61%)" },
+    { tag: t.className, color: "hsl( 39, 67%, 69%)" },
+    { tag: t.keyword, color: "hsl(286, 60%, 67%)" },
+    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#98c379" },
+  ],
+});
 
 const Image = (props) => {
   const [title, setTitle] = useState("");
@@ -218,6 +249,20 @@ const Image = (props) => {
       return 20;
     }
   };
+
+  const getHeight = () => {
+    if (window.matchMedia("(min-width: 800px)").matches) {
+      return "300px";
+    } else {
+      return "200px";
+    }
+  };
+
+  const change = React.useCallback((value, viewUpdate) => {
+    if (value.length === 100) {
+      console.log(value);
+    }
+  }, []);
 
   return (
     <ImageContainer id="capture" background={background}>
@@ -240,7 +285,18 @@ const Image = (props) => {
           </FilenameContainer>
           <Icon mode={mode}></Icon>
         </Header>
-        <Main></Main>
+        <CodeMirror
+          value=""
+          height={getHeight()}
+          width="95%"
+          theme={myTheme}
+          extensions={[javascript({ jsx: true })]}
+          onChange={change}
+          options={{
+            autoCompletion: false,
+            syntaxHighlighting: false,
+          }}
+        />
       </TextEditor>
     </ImageContainer>
   );

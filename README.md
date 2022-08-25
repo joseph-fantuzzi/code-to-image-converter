@@ -7,6 +7,9 @@
 <p align="center">
   A code to styled image converter.
 </p>
+<p align="center">
+  Design File: https://www.figma.com/file/1GWlAsHPjiwJ8nRDnECkRY/code-to-image?node-id=3%3A985 
+</p>
 
 ## Installation and Set Up
 
