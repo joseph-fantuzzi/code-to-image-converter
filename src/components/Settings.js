@@ -43,9 +43,10 @@ const IconContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 62%);
+    background-color: #ffdf70;
   }
 `;
+
 const Settings = ({
   background,
   setBackground,
