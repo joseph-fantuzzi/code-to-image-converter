@@ -5,6 +5,11 @@ import ExportButton from "./ExportButton";
 import styled from "styled-components";
 import { toPng } from "html-to-image";
 
+const MainContainer = styled.div`
+  max-width: 1330px;
+  margin: 0 auto;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column-reverse;
@@ -48,7 +53,7 @@ const Main = () => {
   }, [ref]);
 
   return (
-    <div>
+    <MainContainer>
       <Container>
         <Settings
           background={background}
@@ -65,7 +70,7 @@ const Main = () => {
       <div ref={ref}>
         <Image background={background} mode={mode} padding={padding} lang={lang} />
       </div>
-    </div>
+    </MainContainer>
   );
 };
 

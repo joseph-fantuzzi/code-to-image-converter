@@ -7,6 +7,11 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
+const NavContainer = styled.div`
+  max-width: 1330px;
+  margin: 0 auto;
+`;
+
 const InnerContainer = styled.div`
   min-height: calc(100vh - 43.188px);
 `;
@@ -22,10 +27,11 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   padding: 3em 0;
-  margin-left: 5%;
+  margin: 0 5%;
+  max-width: 864px;
 
   @media (min-width: 800px) {
-    margin-left: 17.5%;
+    margin: 0 17.5%;
   }
 `;
 
@@ -59,13 +65,15 @@ function App() {
   return (
     <Container>
       <InnerContainer>
-        <Nav>
-          <Logo />
-          <Header>
-            <Title>Zitrous</Title>
-            <Description>An all-in-one code to styled image converter.</Description>
-          </Header>
-        </Nav>
+        <NavContainer>
+          <Nav>
+            <Logo />
+            <Header>
+              <Title>Zitrous</Title>
+              <Description>An all-in-one code to styled image converter.</Description>
+            </Header>
+          </Nav>
+        </NavContainer>
         <Main />
       </InnerContainer>
       <Footer>
