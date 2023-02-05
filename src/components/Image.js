@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import "../App.css";
 import styled from "styled-components";
 import CodeMirror from "@uiw/react-codemirror";
@@ -22,7 +22,6 @@ import { tags as t } from "@lezer/highlight";
 
 const ImageContainer = styled.div`
   width: 90%;
-  height: 400px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -66,30 +65,19 @@ const ImageContainer = styled.div`
 
   @media (min-width: 800px) {
     width: 65%;
-    height: 550px;
   }
 `;
 const TextEditor = styled.div`
-  width: ${(props) => {
+  width: 100%;
+  margin: ${(props) => {
     if (props.padding === "SM") {
-      return "96%";
+      return "1em 1em";
     } else if (props.padding === "MD") {
-      return "83%";
+      return "2em 2em";
     } else if (props.padding === "LG") {
-      return "69.5%";
+      return "4em 4em";
     } else if (props.padding === "XL") {
-      return "57%";
-    }
-  }};
-  height: ${(props) => {
-    if (props.padding === "SM") {
-      return "96%";
-    } else if (props.padding === "MD") {
-      return "83%";
-    } else if (props.padding === "LG") {
-      return "69.5%";
-    } else if (props.padding === "XL") {
-      return "57%";
+      return "8em 8em";
     }
   }};
   -webkit-appearance: none;
@@ -206,11 +194,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em 1em;
-
-  @media (min-width: 800px) {
-    padding: 1em 1.5em;
-  }
+  padding: 1rem 2.5rem;
 `;
 
 const Icon = styled.div`
@@ -297,25 +281,7 @@ const Image = (props) => {
     }
   };
 
-  const getHeight = useCallback(() => {
-    if (window.matchMedia("(min-width: 800px)").matches) {
-      if (padding === "SM") return "450px";
-      else if (padding === "MD") return "380px";
-      else if (padding === "LG") return "300px";
-      else if (padding === "XL") return "240px";
-    } else {
-      if (padding === "SM") return "320px";
-      else if (padding === "MD") return "260px";
-      else if (padding === "LG") return "210px";
-      else if (padding === "XL") return "160px";
-    }
-  }, [padding]);
-
-  useEffect(() => {
-    getHeight();
-  }, [padding, getHeight]);
-
-  const change = React.useCallback((value, viewUpdate) => {
+  const change = useCallback((value, viewUpdate) => {
     setCode(value);
   }, []);
 
@@ -343,7 +309,6 @@ const Image = (props) => {
         {lang === "JavaScript" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -355,7 +320,6 @@ const Image = (props) => {
         {lang === "HTML" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -367,7 +331,6 @@ const Image = (props) => {
         {lang === "CSS" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -379,7 +342,6 @@ const Image = (props) => {
         {lang === "Python" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -391,7 +353,6 @@ const Image = (props) => {
         {lang === "Java" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -403,7 +364,6 @@ const Image = (props) => {
         {lang === "Rust" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -415,7 +375,6 @@ const Image = (props) => {
         {lang === "SQL" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -427,7 +386,6 @@ const Image = (props) => {
         {lang === "PHP" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -439,7 +397,6 @@ const Image = (props) => {
         {lang === "Markdown" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -454,7 +411,6 @@ const Image = (props) => {
         {lang === "JSON" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -466,7 +422,6 @@ const Image = (props) => {
         {lang === "C++" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
@@ -478,7 +433,6 @@ const Image = (props) => {
         {lang === "Go" && (
           <CodeMirror
             value={code}
-            height={getHeight()}
             className="CodeMirror"
             width="95%"
             onChange={change}
