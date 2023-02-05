@@ -93,7 +93,8 @@ const TextEditor = styled.div`
     }
   }};
   -webkit-appearance: none;
-  -webkit-box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.26);
+  -webkit-box-shadow: 20px 20px 20px 3px #00000041;
+  -moz-box-shadow: 20px 20px 20px 3px #00000041;
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.26);
   border-radius: 24px;
   transition: all 0.3s ease;
