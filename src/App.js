@@ -77,7 +77,7 @@ function App() {
         <Main />
       </InnerContainer>
       <Footer>
-        <p>Designed and Created By Joseph Fantuzzi</p>
+        <p>Designed and Created By Joseph Fantuzzi 2022-2023</p>
       </Footer>
     </Container>
   );

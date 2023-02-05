@@ -2,14 +2,17 @@
   outline: none !important;
 }
 
-.CodeMirror {
-  font-size: 1em;
-  height: auto;
+.cm-editor {
+  width: 100%;
 }
 
-.cm-scroller {
-  overflow-y: hidden;
-  overflow-x: auto;
+.cm-gutterElement {
+  display: none;
+}
+
+.CodeMirror {
+  font-size: 1em;
+  padding: 0 2rem 1rem 2rem;
 }
 
 @media (min-width: 800px) {

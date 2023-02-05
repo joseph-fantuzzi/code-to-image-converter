@@ -88,10 +88,10 @@ const SizeSelected = styled.p`
 
 const PaddingDropDown = ({ setDropDown, padding, setPadding }) => {
   const sizes = [
-    { size: "SM", amount: "20" },
-    { size: "MD", amount: "80" },
-    { size: "LG", amount: "140" },
-    { size: "XL", amount: "200" },
+    { size: "SM", amount: "16" },
+    { size: "MD", amount: "32" },
+    { size: "LG", amount: "64" },
+    { size: "XL", amount: "128" },
   ];
 
   const clickHandler = (amount) => {
