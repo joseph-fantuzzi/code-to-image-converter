@@ -92,9 +92,9 @@ const TextEditor = styled.div`
       return "57%";
     }
   }};
-  -webkit-appearance: none;
-  -webkit-box-shadow: 20px 20px 20px 3px #00000041;
-  -moz-box-shadow: 20px 20px 20px 3px #00000041;
+  -webkit-appearance: none !important;
+  -webkit-box-shadow: 20px 20px 20px 3px #00000041 !important;
+  -moz-box-shadow: 20px 20px 20px 3px #00000041 !important;
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.26);
   border-radius: 24px;
   transition: all 0.3s ease;
