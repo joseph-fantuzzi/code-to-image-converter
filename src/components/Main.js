@@ -1,9 +1,12 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import download from "downloadjs";
 import Settings from "./Settings";
 import Image from "./Image";
+import Resize from "./Resize";
 import ExportButton from "./ExportButton";
 import styled from "styled-components";
 import { toPng } from "html-to-image";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 const MainContainer = styled.div`
   max-width: 1330px;
@@ -32,25 +35,22 @@ const Main = () => {
   const [mode, setMode] = useState("dark");
   const [padding, setPadding] = useState("LG");
   const [lang, setLang] = useState("JavaScript");
+  const isDesktop = useMediaQuery("(min-width: 800px)");
+  const [imageWidth, setImageWidth] = useState(65);
 
-  const ref = useRef(null);
+  useEffect(() => {
+    isDesktop ? setImageWidth(65) : setImageWidth(90);
+  }, [isDesktop]);
 
   const handleExport = useCallback(() => {
-    if (ref.current === null) {
-      return;
-    }
-
-    toPng(ref.current, { cacheBust: true })
+    toPng(document.getElementById("capture"), { cacheBust: true, style: { margin: "0px" } })
       .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "code.png";
-        link.href = dataUrl;
-        link.click();
+        download(dataUrl, "code.png");
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [ref]);
+  }, []);
 
   return (
     <MainContainer>
@@ -67,9 +67,14 @@ const Main = () => {
         />
         <ExportButton handleExport={handleExport} />
       </Container>
-      <div ref={ref}>
-        <Image background={background} mode={mode} padding={padding} lang={lang} />
-      </div>
+      <Resize setImageWidth={setImageWidth} />
+      <Image
+        background={background}
+        mode={mode}
+        padding={padding}
+        lang={lang}
+        imageWidth={imageWidth}
+      />
     </MainContainer>
   );
 };

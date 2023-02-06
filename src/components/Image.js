@@ -21,7 +21,11 @@ import { createTheme } from "@uiw/codemirror-themes";
 import { tags as t } from "@lezer/highlight";
 
 const ImageContainer = styled.div`
-  width: 90%;
+  width: ${(props) => {
+    return `${props.imageWidth}%`;
+  }};
+  min-width: 100px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -64,7 +68,8 @@ const ImageContainer = styled.div`
   }};
 
   @media (min-width: 800px) {
-    width: 65%;
+    max-width: 864px;
+    min-width: 450px;
   }
 `;
 const TextEditor = styled.div`
@@ -266,7 +271,7 @@ const Image = (props) => {
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
 
-  const { background, mode, padding, lang } = props;
+  const { background, mode, padding, lang, imageWidth } = props;
 
   const onChange = (e) => {
     e.target.setAttribute("size", e.target.value.length + 14);
@@ -286,7 +291,7 @@ const Image = (props) => {
   }, []);
 
   return (
-    <ImageContainer id="capture" background={background}>
+    <ImageContainer id="capture" background={background} imageWidth={imageWidth}>
       <TextEditor mode={mode} padding={padding}>
         <Header>
           <DotContainer>
