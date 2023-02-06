@@ -211,7 +211,7 @@ const Icon = styled.div`
 `;
 
 const myThemeDark = createTheme({
-  dark: "dark",
+  theme: "dark",
   settings: {
     background: "linear-gradient(105.19deg, rgba(0, 0, 0, 0.4725) 0%, rgba(0, 0, 0, 0.63) 101.41%)",
     foreground: "#e2e8ec",
@@ -224,22 +224,24 @@ const myThemeDark = createTheme({
     lineHighlight: "rgba(0, 0, 0, 0)",
   },
   styles: [
-    {
-      tag: [t.function(t.variableName), t.function(t.propertyName), t.url, t.processingInstruction],
-      color: "hsl(207, 82%, 66%)",
-    },
-    { tag: [t.tagName, t.heading], color: "#e06c75" },
-    { tag: t.comment, color: "#54636D" },
-    { tag: [t.propertyName], color: "hsl(220, 14%, 71%)" },
-    { tag: [t.attributeName, t.number], color: "hsl( 29, 54%, 61%)" },
+    { tag: t.variableName, color: "#73DFA5" },
+    { tag: [t.tagName, t.heading], color: "#FF659C" },
+    { tag: t.comment, color: "#807796" },
+    { tag: t.propertyName, color: "#1AC8FF" },
+    { tag: t.number, color: "#7A7FFD" },
+    { tag: t.bool, color: "#5c6166" },
+    { tag: t.null, color: "#5c6166" },
+    { tag: t.attributeName, color: "#73DFA5" },
     { tag: t.className, color: "hsl( 39, 67%, 69%)" },
-    { tag: t.keyword, color: "hsl(286, 60%, 67%)" },
-    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#98c379" },
+    { tag: t.keyword, color: "#FF659C" },
+    { tag: t.definition(t.typeName), color: "#73DFA5" },
+    { tag: t.typeName, color: "#5c6166" },
+    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#DFD473" },
   ],
 });
 
 const myThemeLight = createTheme({
-  dark: "light",
+  theme: "light",
   settings: {
     background:
       "linear-gradient(103.82deg, rgba(255, 255, 255, 0.57) 5.09%, rgba(255, 255, 255, 0.76) 81.57%)",
@@ -253,18 +255,29 @@ const myThemeLight = createTheme({
     lineHighlight: "rgba(0, 0, 0, 0)",
   },
   styles: [
-    {
-      tag: [t.function(t.variableName), t.function(t.propertyName), t.url, t.processingInstruction],
-      color: "hsl(207, 82%, 66%)",
-    },
-    { tag: [t.tagName, t.heading], color: "#e06c75" },
-    { tag: t.comment, color: "#54636D" },
-    { tag: [t.propertyName], color: "hsl(220, 14%, 71%)" },
-    { tag: [t.attributeName, t.number], color: "hsl( 29, 54%, 61%)" },
+    { tag: t.variableName, color: "#229F5C" },
+    { tag: [t.tagName, t.heading], color: "#FF0C61" },
+    { tag: t.comment, color: "#807796" },
+    { tag: t.propertyName, color: "#1AC8FF" },
+    { tag: t.number, color: "#7A7FFD" },
+    { tag: t.bool, color: "#5c6166" },
+    { tag: t.null, color: "#5c6166" },
+    { tag: t.attributeName, color: "#229F5C" },
     { tag: t.className, color: "hsl( 39, 67%, 69%)" },
-    { tag: t.keyword, color: "hsl(286, 60%, 67%)" },
-    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#98c379" },
+    { tag: t.keyword, color: "#FF0C61" },
+    { tag: t.definition(t.typeName), color: "#73DFA5" },
+    { tag: t.typeName, color: "#5c6166" },
+    { tag: [t.string, t.regexp, t.special(t.propertyName)], color: "#E08569" },
   ],
+});
+
+const fontFamilyTheme = EditorView.theme({
+  "&": {
+    fontSize: "12pt",
+  },
+  ".cm-content": {
+    fontFamily: "Fira code, monospace",
+  },
 });
 
 const Image = (props) => {
@@ -318,7 +331,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, javascript({ jsx: true })]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, javascript({ jsx: true })]}
             options={{}}
           />
         )}
@@ -329,7 +342,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, html()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, html()]}
             options={{}}
           />
         )}
@@ -340,7 +353,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, css()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, css()]}
             options={{}}
           />
         )}
@@ -351,7 +364,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, python()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, python()]}
             options={{}}
           />
         )}
@@ -362,7 +375,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, java()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, java()]}
             options={{}}
           />
         )}
@@ -373,7 +386,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, rust()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, rust()]}
             options={{}}
           />
         )}
@@ -384,7 +397,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, sql()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, sql()]}
             options={{}}
           />
         )}
@@ -395,7 +408,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, php()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, php()]}
             options={{}}
           />
         )}
@@ -407,6 +420,7 @@ const Image = (props) => {
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
             extensions={[
+              fontFamilyTheme,
               EditorView.lineWrapping,
               markdown({ base: markdownLanguage, codeLanguages: languages }),
             ]}
@@ -420,7 +434,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, json()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, json()]}
             options={{}}
           />
         )}
@@ -431,7 +445,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, cpp()]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, cpp()]}
             options={{}}
           />
         )}
@@ -442,7 +456,7 @@ const Image = (props) => {
             width="95%"
             onChange={change}
             theme={mode === "dark" ? myThemeDark : myThemeLight}
-            extensions={[EditorView.lineWrapping, StreamLanguage.define(go)]}
+            extensions={[fontFamilyTheme, EditorView.lineWrapping, StreamLanguage.define(go)]}
             options={{}}
           />
         )}

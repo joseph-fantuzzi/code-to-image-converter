@@ -15,6 +15,10 @@
   padding: 0 2rem 1rem 2rem;
 }
 
+.cm-tooltip {
+  display: none;
+}
+
 @media (min-width: 800px) {
   .CodeMirror {
     font-size: 1.3em;
