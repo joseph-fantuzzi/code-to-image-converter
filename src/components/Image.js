@@ -282,7 +282,7 @@ const fontFamilyTheme = EditorView.theme({
 
 const Image = (props) => {
   const [title, setTitle] = useState("");
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState("console.log('Hello world!');");
 
   const { background, mode, padding, lang, imageWidth } = props;
 

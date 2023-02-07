@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { CgSoftwareDownload } from "react-icons/cg";
 
 const ButtonContainer = styled.div`
   margin-bottom: 1.5em;
@@ -14,7 +13,7 @@ const ButtonContainer = styled.div`
 const Button = styled.div`
   box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
   border-radius: 8px;
-  padding: 0.4em 0.7em;
+  padding: 0.7em 1em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,47 +21,21 @@ const Button = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #ffdf70;
-  }
-
-  @media (min-width: 800px) {
-    padding: 0.7em 1em;
+    color: white;
+    background-color: #dc766d;
   }
 `;
 
 const Text = styled.p`
-  font-size: 0.9em;
-  margin-right: 0.3em;
-
-  @media (min-width: 800px) {
-    font-size: 1.2em;
-  }
+  font-size: 1.2em;
+  font-weight: 300;
 `;
 
-const ExportButton = ({ handleExport }) => {
-  const [fontSize, setFontSize] = useState(20);
-
-  useEffect(() => {
-    getFontSize();
-  }, []);
-
-  const getFontSize = () => {
-    if (window.matchMedia("(min-width: 800px)").matches) {
-      setFontSize(30);
-    } else {
-      setFontSize(20);
-    }
-  };
-
-  window.addEventListener("resize", () => {
-    getFontSize();
-  });
-
+const ExportButton = ({ handlePngExport }) => {
   return (
     <ButtonContainer>
-      <Button onClick={handleExport}>
+      <Button onClick={handlePngExport}>
         <Text>Export</Text>
-        <CgSoftwareDownload fontSize={fontSize} />
       </Button>
     </ButtonContainer>
   );

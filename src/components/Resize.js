@@ -17,6 +17,11 @@ const Icon = styled.div`
   border-radius: 50%;
   box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
   padding: 0.5em;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #c1bdbd;
+  }
 `;
 
 const Resize = ({ setImageWidth }) => {
