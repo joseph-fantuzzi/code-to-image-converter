@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./App.css";
 import Logo from "./components/Logo";
 import Main from "./components/Main";
@@ -62,8 +63,10 @@ const Description = styled.p`
 `;
 
 function App() {
+  const [exportDropDown, setExportDropDown] = useState(false);
+
   return (
-    <Container>
+    <Container onClick={() => (exportDropDown ? setExportDropDown(false) : null)}>
       <InnerContainer>
         <NavContainer>
           <Nav>
@@ -74,7 +77,7 @@ function App() {
             </Header>
           </Nav>
         </NavContainer>
-        <Main />
+        <Main exportDropDown={exportDropDown} setExportDropDown={setExportDropDown} />
       </InnerContainer>
       <Footer>
         <p>Designed and Created By Joseph Fantuzzi 2022-2023</p>

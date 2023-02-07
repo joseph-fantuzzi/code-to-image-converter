@@ -4,6 +4,7 @@ import Settings from "./Settings";
 import Image from "./Image";
 import Resize from "./Resize";
 import ExportButton from "./ExportButton";
+import ExportDropDown from "./ExportDropDown";
 import styled from "styled-components";
 import { toPng, toSvg, toJpeg, toBlob } from "html-to-image";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -31,7 +32,14 @@ const Container = styled.div`
   }
 `;
 
-const Main = () => {
+const ExportContainer = styled.div`
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+
+const Main = ({ exportDropDown, setExportDropDown }) => {
   const [background, setBackground] = useState("orange/red");
   const [mode, setMode] = useState("dark");
   const [padding, setPadding] = useState("LG");
@@ -100,10 +108,17 @@ const Main = () => {
           lang={lang}
           setLang={setLang}
         />
-        <ExportButton handlePngExport={handlePngExport} />
-        <button onClick={handleSvgExport}>Export as svg</button>
-        <button onClick={handleJpegExport}>Export as jpeg</button>
-        <button onClick={handleCopyImageExport}>Copy Image</button>
+        <ExportContainer>
+          <ExportButton handlePngExport={handlePngExport} />
+          <ExportDropDown
+            handlePngExport={handlePngExport}
+            handleSvgExport={handleSvgExport}
+            handleJpegExport={handleJpegExport}
+            handleCopyImageExport={handleCopyImageExport}
+            exportDropDown={exportDropDown}
+            setExportDropDown={setExportDropDown}
+          />
+        </ExportContainer>
       </Container>
       <Resize setImageWidth={setImageWidth} />
       <Image
