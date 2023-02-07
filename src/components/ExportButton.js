@@ -39,7 +39,7 @@ const Text = styled.p`
   }
 `;
 
-const ExportButton = ({ handleExport }) => {
+const ExportButton = ({ handlePngExport }) => {
   const [fontSize, setFontSize] = useState(20);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const ExportButton = ({ handleExport }) => {
 
   return (
     <ButtonContainer>
-      <Button onClick={handleExport}>
+      <Button onClick={handlePngExport}>
         <Text>Export</Text>
         <CgSoftwareDownload fontSize={fontSize} />
       </Button>

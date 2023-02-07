@@ -5,8 +5,9 @@ import Image from "./Image";
 import Resize from "./Resize";
 import ExportButton from "./ExportButton";
 import styled from "styled-components";
-import { toPng } from "html-to-image";
+import { toPng, toSvg, toJpeg, toBlob } from "html-to-image";
 import useMediaQuery from "../hooks/useMediaQuery";
+const { ClipboardItem } = window;
 
 const MainContainer = styled.div`
   max-width: 1330px;
@@ -42,10 +43,44 @@ const Main = () => {
     isDesktop ? setImageWidth(65) : setImageWidth(90);
   }, [isDesktop]);
 
-  const handleExport = useCallback(() => {
+  const handlePngExport = useCallback(() => {
     toPng(document.getElementById("capture"), { cacheBust: true, style: { margin: "0px" } })
       .then((dataUrl) => {
         download(dataUrl, "code.png");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleSvgExport = useCallback(() => {
+    toSvg(document.getElementById("capture"), { cacheBust: true, style: { margin: "0px" } })
+      .then((dataUrl) => {
+        download(dataUrl, "code.svg");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleJpegExport = useCallback(() => {
+    toJpeg(document.getElementById("capture"), {
+      quality: 0.95,
+      cacheBust: true,
+      style: { margin: "0px" },
+    })
+      .then((dataUrl) => {
+        download(dataUrl, "code.jpeg");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleCopyImageExport = useCallback(() => {
+    toBlob(document.getElementById("capture"), { cacheBust: true, style: { margin: "0px" } })
+      .then(async (blob) => {
+        await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +100,10 @@ const Main = () => {
           lang={lang}
           setLang={setLang}
         />
-        <ExportButton handleExport={handleExport} />
+        <ExportButton handlePngExport={handlePngExport} />
+        <button onClick={handleSvgExport}>Export as svg</button>
+        <button onClick={handleJpegExport}>Export as jpeg</button>
+        <button onClick={handleCopyImageExport}>Copy Image</button>
       </Container>
       <Resize setImageWidth={setImageWidth} />
       <Image
