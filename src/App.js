@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Logo from "./components/Logo";
 import Main from "./components/Main";
+import Switch from "./components/Switch";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -67,6 +68,7 @@ function App() {
 
   return (
     <Container onClick={() => (exportDropDown ? setExportDropDown(false) : null)}>
+      <Switch />
       <InnerContainer>
         <NavContainer>
           <Nav>
