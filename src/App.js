@@ -4,6 +4,9 @@ import Logo from "./components/Logo";
 import Main from "./components/Main";
 import Switch from "./components/Switch";
 import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./globalStyles";
+import { lightTheme, darkTheme } from "./Themes";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -65,26 +68,38 @@ const Description = styled.p`
 
 function App() {
   const [exportDropDown, setExportDropDown] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   return (
-    <Container onClick={() => (exportDropDown ? setExportDropDown(false) : null)}>
-      <Switch />
-      <InnerContainer>
-        <NavContainer>
-          <Nav>
-            <Logo />
-            <Header>
-              <Title>Zitrous</Title>
-              <Description>An all-in-one code to styled image converter.</Description>
-            </Header>
-          </Nav>
-        </NavContainer>
-        <Main exportDropDown={exportDropDown} setExportDropDown={setExportDropDown} />
-      </InnerContainer>
-      <Footer>
-        <p>Designed and Created By Joseph Fantuzzi 2022-2023</p>
-      </Footer>
-    </Container>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <Container onClick={() => (exportDropDown ? setExportDropDown(false) : null)}>
+        <Switch theme={theme} themeToggler={themeToggler} />
+        <InnerContainer>
+          <NavContainer>
+            <Nav>
+              <Logo />
+              <Header>
+                <Title>Zitrous</Title>
+                <Description>An all-in-one code to styled image converter.</Description>
+              </Header>
+            </Nav>
+          </NavContainer>
+          <Main
+            exportDropDown={exportDropDown}
+            setExportDropDown={setExportDropDown}
+            theme={theme}
+          />
+        </InnerContainer>
+        <Footer>
+          <p>Designed and Created By Joseph Fantuzzi 2022-2023</p>
+        </Footer>
+      </Container>
+    </ThemeProvider>
   );
 }
 
