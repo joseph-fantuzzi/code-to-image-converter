@@ -6,7 +6,9 @@ import { BsClipboardPlus, BsClipboardCheck } from "react-icons/bs";
 import { SiSvg } from "react-icons/si";
 
 const ExportIconContainer = styled.div`
-  box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
+  box-shadow: ${(props) =>
+    props.theme === "dark" ? "none" : "4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff"};
+  border: ${(props) => (props.theme === "dark" ? "2px solid gray" : "2px solid #e2e8ec")};
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -20,6 +22,7 @@ const ExportIconContainer = styled.div`
   }
 
   &:hover {
+    border: 2px solid #c1bdbd;
     background-color: #c1bdbd;
   }
 `;
@@ -38,6 +41,7 @@ const DropDown = styled.div`
   background-color: #e2e8ec;
   border-radius: 8px;
   padding: 0;
+  color: #484848;
 `;
 
 const Option = styled.div`
@@ -62,6 +66,7 @@ const ExportDropDown = ({
   handleCopyImageExport,
   exportDropDown,
   setExportDropDown,
+  theme,
 }) => {
   const [check, setCheck] = useState(false);
 
@@ -82,7 +87,7 @@ const ExportDropDown = ({
 
   return (
     <ExportDropDownContainer>
-      <ExportIconContainer onClick={handlExportIconClick}>
+      <ExportIconContainer theme={theme} onClick={handlExportIconClick}>
         <BiChevronDown size={35} />
       </ExportIconContainer>
       {exportDropDown && (

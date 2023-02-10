@@ -15,16 +15,19 @@ const Icon = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
+  box-shadow: ${(props) =>
+    props.theme === "dark" ? "none" : "4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff"};
+  border: ${(props) => (props.theme === "dark" ? "2px solid gray" : "2px solid #e2e8ec")};
   padding: 0.5em;
   transition: all 0.3s ease;
 
   &:hover {
+    border: 2px solid #c1bdbd;
     background-color: #c1bdbd;
   }
 `;
 
-const Resize = ({ setImageWidth }) => {
+const Resize = ({ setImageWidth, theme }) => {
   const plusIntervalRef = useRef(null);
   const minusIntervalRef = useRef(null);
 
@@ -74,6 +77,7 @@ const Resize = ({ setImageWidth }) => {
         onMouseDown={() => handleResize("minus")}
         onMouseUp={() => clearResize("minus")}
         onMouseLeave={() => clearResize("minus")}
+        theme={theme}
       >
         <FiMinus size={18} />
       </Icon>
@@ -81,6 +85,7 @@ const Resize = ({ setImageWidth }) => {
         onMouseDown={() => handleResize("plus")}
         onMouseUp={() => clearResize("plus")}
         onMouseLeave={() => clearResize("plus")}
+        theme={theme}
       >
         <FiPlus size={18} />
       </Icon>

@@ -8,7 +8,8 @@ import DropDown from "./DropDown";
 
 const SettingsContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.66);
-  box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
+  box-shadow: ${(props) =>
+    props.theme === "dark" ? "none" : "4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff"};
   border-radius: 8px;
   color: white;
   display: flex;
@@ -56,6 +57,7 @@ const Settings = ({
   setPadding,
   lang,
   setLang,
+  theme,
 }) => {
   const [dropDown, setDropDown] = useState(false);
 
@@ -68,7 +70,7 @@ const Settings = ({
 
   return (
     <>
-      <SettingsContainer>
+      <SettingsContainer theme={theme}>
         {settings.map((setting, i) => {
           return (
             <Setting key={i}>

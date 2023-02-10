@@ -39,7 +39,7 @@ const ExportContainer = styled.div`
   align-items: flex-end;
 `;
 
-const Main = ({ exportDropDown, setExportDropDown }) => {
+const Main = ({ exportDropDown, setExportDropDown, theme }) => {
   const [background, setBackground] = useState("orange/red");
   const [mode, setMode] = useState("dark");
   const [padding, setPadding] = useState("LG");
@@ -107,9 +107,10 @@ const Main = ({ exportDropDown, setExportDropDown }) => {
           setPadding={setPadding}
           lang={lang}
           setLang={setLang}
+          theme={theme}
         />
         <ExportContainer>
-          <ExportButton handlePngExport={handlePngExport} />
+          <ExportButton handlePngExport={handlePngExport} theme={theme} />
           <ExportDropDown
             handlePngExport={handlePngExport}
             handleSvgExport={handleSvgExport}
@@ -117,10 +118,11 @@ const Main = ({ exportDropDown, setExportDropDown }) => {
             handleCopyImageExport={handleCopyImageExport}
             exportDropDown={exportDropDown}
             setExportDropDown={setExportDropDown}
+            theme={theme}
           />
         </ExportContainer>
       </Container>
-      <Resize setImageWidth={setImageWidth} />
+      <Resize setImageWidth={setImageWidth} theme={theme} />
       <Image
         background={background}
         mode={mode}

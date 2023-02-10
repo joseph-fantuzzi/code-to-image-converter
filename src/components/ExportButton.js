@@ -11,7 +11,9 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.div`
-  box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
+  box-shadow: ${(props) =>
+    props.theme === "dark" ? "none" : "4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff"};
+  border: ${(props) => (props.theme === "dark" ? "2px solid gray" : "2px solid #e2e8ec")};
   border-radius: 8px;
   padding: 0.7em 1em;
   display: flex;
@@ -22,6 +24,7 @@ const Button = styled.div`
 
   &:hover {
     color: white;
+    border: 2px solid #dc766d;
     background-color: #dc766d;
   }
 `;
@@ -31,10 +34,10 @@ const Text = styled.p`
   font-weight: 300;
 `;
 
-const ExportButton = ({ handlePngExport }) => {
+const ExportButton = ({ handlePngExport, theme }) => {
   return (
     <ButtonContainer>
-      <Button onClick={handlePngExport}>
+      <Button theme={theme} onClick={handlePngExport}>
         <Text>Export</Text>
       </Button>
     </ButtonContainer>
